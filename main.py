@@ -12,19 +12,16 @@ file_path = filedialog.askopenfilename(
 
 if file_path:
     print("file:", file_path)
-    # Tutaj możesz dodać kod obsługujący wybrany plik
     str = file_path.rfind('/')
     sub = file_path[str + 1:-1]
 
     excel = openpyxl.load_workbook(file_path)
 
-    # Wydrukuj dostępne arkusze w pliku
     print("what we have:")
     for sheet_name in excel.sheetnames:
         print(sheet_name)
 
     try:
-        # Spróbuj uzyskać dostęp do arkusza 'GetData'
         name=excel.sheetnames
         for data in name:
             data = excel[data]
@@ -42,5 +39,4 @@ if file_path:
             # print(type(sub))
 
     finally:
-        # Zamyka plik Excel
         excel.close()
