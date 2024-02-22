@@ -2,6 +2,7 @@ import openpyxl
 from tkinter import filedialog
 from tkinter import Tk
 import wordlenght
+import wordfunc
 
 root = Tk()
 root.withdraw()
@@ -126,18 +127,39 @@ if file_path:
     finally:
         excel.close()
 
+# for i in range(excelheight+2):
+#     for j in range(excelwidth+2):
+#         if i == 0 | i == excelheight + 1:
+#             for i in range(maxlenght*excelwidth):
+#                 print("_", end="")
+#         else:
+#             if j==0:
+#                 print("|",end="")
+#             else:
+#                 if j==excelwidth+1:
+#                     print("|")
+#                 else:
+#
+#                     print(str(tab[i-1][j-1]).center(maxlenght), end="")
 for i in range(excelheight+2):
+    # print(i)
     for j in range(excelwidth+2):
-        if i == 0 | i == excelheight + 1:
-            for i in range(maxlenght*excelwidth):
+        if i == 0 or i == excelheight + 1:
+            print("|",end="")
+            for i in range(maxlenght*(excelwidth)):
                 print("_", end="")
+
         else:
-            if j==0:
+            if j==0 and not(i == 0 or i == excelheight + 1):
                 print("|",end="")
             else:
-                if j==excelwidth+1:
+                if j==excelwidth+1 and not(i == 0 or i == excelheight + 1):
                     print("|")
-                else:
+                elif (i >=0 and i<=excelheight):
+                    # print("i-1: "+str(i)+" j-1: "+str(j))
+                    print(str(tab[i-1][j-2]).center(maxlenght), end="")
 
-                    print(str(tab[i-1][j-1]).center(maxlenght), end="")
-                    print()
+wfunct=wordfunc.Fun
+tabbb=[]
+tabbb=wfunct.cell(wfunct,"Z2321321ZZZ")
+print(tabbb)
