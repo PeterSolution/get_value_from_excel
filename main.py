@@ -141,6 +141,7 @@ if file_path:
 #                 else:
 #
 #                     print(str(tab[i-1][j-1]).center(maxlenght), end="")
+wfunct=wordfunc.Fun
 for i in range(excelheight+2):
     # print(i)
     for j in range(excelwidth+2):
@@ -157,9 +158,60 @@ for i in range(excelheight+2):
                     print("|")
                 elif (i >=0 and i<=excelheight):
                     # print("i-1: "+str(i)+" j-1: "+str(j))
-                    print(str(tab[i-1][j-2]).center(maxlenght), end="")
+                    if (wfunct.isfunction(wfunct,tab[i-1][j-2]))==False:
+                        print(str(tab[i-1][j-2]).center(maxlenght), end="")
 
-wfunct=wordfunc.Fun
+                    else:
+                        tabpom=[]
+                        command=""
+                        alphaCheck=""
+                        SubStrOfFun=tab[i-1][j-2]
+                        SubStrOfFun=SubStrOfFun[1:]
+                        pomvar=0
+                        pom2var=0
+                        xcel=0
+                        pomsum=0
+                        ycel=0
+                        pom3var=""
+                        intlicz=1
+                        special_chars = {'+', '-', '=', '/', '*'}
+                        # whatfun=wfunct.whatfunction(SubStrOfFun)
+                        if wfunct.whatfunction(SubStrOfFun)=="IF":
+                            # print("IF")
+                            commandstart=SubStrOfFun.rfind("(")
+                            subofsub=SubStrOfFun[commandstart:-1]
+                            pomvar=commandstart
+                            while pom2var==0:
+
+                                if pom2var==1 and len(pom3var)==0:
+                                    if subofsub[intlicz]!=" ":
+                                        if subofsub[intlicz].isdigit() or (subofsub[intlicz] in special_chars):
+                                            ycel=ycel*10+subofsub[intlicz]
+                                        else:
+                                            if subofsub[intlicz].isalpha():
+                                                while subofsub[intlicz].isalpha():
+                                                    tabpom.append(subofsub[intlicz])
+                                                tabpom2=wfunct.cell(wfunct,tabpom)
+                                                for integervalue in tabpom2:
+                                                    pomsum=pomsum+tabpom2[integervalue]
+                                                xcel=pomsum-1
+                                            else:
+                                                helpingstrfromtab=tab[ycel,xcel]
+                                                tab[ycel,xcel]=helpingstrfromtab[:commandstart+1]+helpingstrfromtab
+                                                pom2var=1
+                                intlicz=intlicz+1
+                                                # alphaCheck=alphaCheck+subofsub[intlicz]
+
+                        elif wfunct.whatfunction(SubStrOfFun)=="OR":
+                            print("OR")
+                        elif wfunct.whatfunction(SubStrOfFun)=="ROUNDUP":
+                            print("ROUND")
+                        elif wfunct.whatfunction(SubStrOfFun)=="SUM":
+                            print("SUM")
+                        else:
+                            print(str(tab[i - 1][j - 2]).center(maxlenght), end="")
+                    intlicz=intlicz+1
+
 tabbb=[]
 tabbb=wfunct.cell(wfunct,"Z2321321ZZZ")
 print(tabbb)

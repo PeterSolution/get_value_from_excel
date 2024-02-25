@@ -4,7 +4,7 @@ class Fun:
         self.funtab = ["IF", "OR", "ROUNDUP", "SUM"]
 
     def isfunction(self, word):
-        if word[0:1] == "=":  # Poprawiony warunek, używamy '==' do porównywania
+        if str(word)[0:1] == "=":
             return True
         else:
             return False
@@ -15,11 +15,11 @@ class Fun:
         try:
             pom2 = pom1.rfind("=")
             subfun = pom1[pom2 + 1:]
-            if subfun.startswith("I"):
+            if subfun.startswith("IF"):
                 return "IF"
-            elif subfun.startswith("O"):
+            elif subfun.startswith("OR"):
                 return "OR"
-            elif subfun.startswith("R"):
+            elif subfun.startswith("ROUNDUP"):
                 return "ROUNDUP"
             elif subfun.startswith("SUM"):
                 return "SUM"
@@ -63,7 +63,7 @@ class Fun:
                 if current_number!="":
                     tab.append(int(current_number))
                     current_number=""
-                tab.append(ord(char.upper()) - ord('A'))
+                tab.append(ord(char.upper()) - ord('A')+1)
                 value += 1
             elif char.isdigit():
                 current_number += char
